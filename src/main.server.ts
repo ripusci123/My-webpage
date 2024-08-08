@@ -1,7 +1,15 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { AppComponent } from './app/app.component';
-import { config } from './app/app.config.server';
+import { AppServerModule } from './app/app.server.module';
+import { enableProdMode } from '@angular/core';
+import { environment } from './environments/environments';
+import { renderModule } from '@angular/platform-server';
 
-const bootstrap = () => bootstrapApplication(AppComponent, config);
+if (environment.production) {
+  enableProdMode();
+}
 
-export default bootstrap;
+export async function renderApp() {
+  return await renderModule(AppServerModule, {
+    document: '<app-root></app-root>',
+    url: '/'
+  });
+}

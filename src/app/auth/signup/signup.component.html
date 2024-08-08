@@ -1,0 +1,21 @@
+<!-- src/app/auth/signup/signup.component.html -->
+<div>
+  <h2>Sign Up</h2>
+  <div *ngIf="step === 1">
+    <input [(ngModel)]="user.emailOrPhone" placeholder="Email or Phone" />
+    <input [(ngModel)]="user.name" placeholder="Name" />
+    <input [(ngModel)]="user.password" type="password" placeholder="Create Password" />
+    <button (click)="onSignupStep1()">Continue</button>
+  </div>
+  <div *ngIf="step === 2">
+    <input [(ngModel)]="user.organizationName" placeholder="Organization Name" />
+    <select [(ngModel)]="user.designation">
+      <option *ngFor="let org of allowedOrganizations" [value]="org">{{ org }}</option>
+    </select>
+    <input [(ngModel)]="user.birthDate" type="date" placeholder="Birth Date" />
+    <input [(ngModel)]="user.city" placeholder="City" />
+    <input [(ngModel)]="user.pincode" placeholder="Pincode" />
+    <button (click)="onSignupStep2()">Sign Up</button>
+    <p *ngIf="errorMessage">{{ errorMessage }}</p>
+  </div>
+</div>
